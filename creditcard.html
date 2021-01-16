@@ -67,7 +67,7 @@
       </div>
       <form>
         <div class="form-group">
-          <input onkeyup="updateCardInput(this.value)" type="text" class="form-control" id="inputCardNumber" placeholder="Card Number">
+          <input onkeyup="updateCardInput(this.value)" type="number" class="form-control" id="inputCardNumber" placeholder="Card Number">
         </div>
         <div class="form-group">
           <input type="text" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-name" placeholder="Name">
@@ -77,7 +77,7 @@
             <input type="text" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-validThru" placeholder="Valid Thru">
           </div>
           <div class="form-group col-md-6">
-            <input type="text" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-CVC" placeholder="CVC">
+            <input type="text" type="number" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-CVC" placeholder="CVC">
           </div>
         </div>
         <div class="form-row">
