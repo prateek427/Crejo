@@ -8,24 +8,76 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="creditcard.css">
+    <script>
 
-    <title>Hello, world!</title>
+      window.onload = () => {
+        const cvc = document.getElementById('input-CVC');
+        const card = document.getElementById('flip-card')
+
+        cvc.onmouseover = () => {
+          card.classList.add('flip');
+        }
+
+        cvc.onmouseout = () => {
+          card.classList.remove('flip');
+        }
+      }
+
+      getCardPin = (pin) => {
+        const trailingPin = 16 - pin.length;
+        const cardPin = pin + "*".repeat(trailingPin);
+        const formattedPin = cardPin.match(/.{1,4}/g).join(" ");
+        console.log(formattedPin);
+        return formattedPin;
+      }
+      updateCardInput = (value) => {
+        document.getElementById('cardPin').innerHTML = getCardPin(value);
+      }
+
+      updateValues =(value, id) => {
+        document.getElementById(id.split("-")[1]).innerHTML = value;
+      }
+
+    </script>
   </head>
   <body>
     <div class="container">
+      <div id="flip-card" class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-card-front-contents">
+            <h3 id="cardPin" class="card-title">**** **** **** ****</h3>
+            <div class="row align-items-end">
+              <div class="col-md-8">
+                <p class="name" id="name">YOUR NAME HERE</p>
+              </div>
+              <div class="col-md-4">
+                <p style="margin: 0; font-size: 12px; opacity: 0.7;">valid thru</p>
+                <p id="validThru">* * / * *</p>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="flip-card-back">
+          <div class="cvcWrapper">
+            <p id="CVC" style="padding-left: 30%" class="cvc">***</p>
+          </div>
+          </div>
+        </div>
+      </div>
       <form>
         <div class="form-group">
-          <input type="text" class="form-control" id="inputAddress" placeholder="Card Number">
+          <input onkeyup="updateCardInput(this.value)" type="text" class="form-control" id="inputCardNumber" placeholder="Card Number">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Name">
+          <input type="text" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-name" placeholder="Name">
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <input type="text" class="form-control" id="inputCity" placeholder="Valid Thru">
+            <input type="text" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-validThru" placeholder="Valid Thru">
           </div>
           <div class="form-group col-md-6">
-            <input type="text" class="form-control" id="inputCity" placeholder="CVC">
+            <input type="text" onkeyup="updateValues(this.value, this.id)" class="form-control" id="input-CVC" placeholder="CVC">
           </div>
         </div>
         <div class="form-row">
